@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+  ~ Copyright 2017 Confluent Inc.
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~ http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  -->
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>io.confluent</groupId>
+        <artifactId>common</artifactId>
+        <version>5.1.0-SNAPSHOT</version>
+    </parent>
+
+    <artifactId>kafka-connect-storage-common-parent</artifactId>
+    <packaging>pom</packaging>
+    <name>kafka-connect-storage-common-parent</name>
+    <organization>
+        <name>Confluent, Inc.</name>
+        <url>http://confluent.io</url>
+    </organization>
+    <url>http://confluent.io</url>
+    <description>
+        Kafka Connect common packages for connectors transferring data between Kafka and distributed filesystems or cloud storage.
+    </description>
+
+    <licenses>
+        <license>
+            <name>Apache License 2.0</name>
+            <url>http://www.apache.org/licenses/LICENSE-2.0.html</url>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>
+
+    <scm>
+        <connection>scm:git:git://github.com/confluentinc/kafka-connect-storage-common.git</connection>
+        <developerConnection>scm:git:git@github.com:confluentinc/kafka-connect-storage-common.git</developerConnection>
+        <url>https://github.com/confluentinc/kafka-connect-storage-common</url>
+        <tag>HEAD</tag>
+    </scm>
+
+    <modules>
+        <module>common</module>
+        <module>core</module>
+        <module>wal</module>
+        <module>partitioner</module>
+        <module>format</module>
+        <module>hive</module>
+        <module>package-kafka-connect-storage-common</module>
+    </modules>
+
+    <properties>
+        <commons-io.version>2.4</commons-io.version>
+        <confluent.maven.repo>http://packages.confluent.io/maven/</confluent.maven.repo>
+        <confluent.version>5.1.0-SNAPSHOT</confluent.version>
+        <hadoop.version>2.7.3</hadoop.version>
+        <hive.version>1.2.2</hive.version>
+        <joda.version>2.9.6</joda.version>
+        <licenses.version>5.1.0-SNAPSHOT</licenses.version>
+        <parquet.version>1.8.2</parquet.version>
+        <httpclient.version>4.5.2</httpclient.version>
+        <httpcore.version>4.4.4</httpcore.version>
+        <jline.version>2.12.1</jline.version>
+    </properties>
+
+    <repositories>
+        <repository>
+            <id>confluent</id>
+            <name>Confluent</name>
+            <url>${confluent.maven.repo}</url>
+        </repository>
+    </repositories>
+
+    <dependencyManagement>
+        <dependencies>
+            <!--children-->
+            <dependency>
+                <groupId>io.confluent</groupId>
+                <artifactId>kafka-connect-storage-common</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.confluent</groupId>
+                <artifactId>kafka-connect-storage-core</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.confluent</groupId>
+                <artifactId>kafka-connect-storage-format</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.confluent</groupId>
+                <artifactId>kafka-connect-storage-hive</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.confluent</groupId>
+                <artifactId>kafka-connect-storage-partitioner</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.confluent</groupId>
+                <artifactId>kafka-connect-storage-wal</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.confluent</groupId>
+                <artifactId>kafka-connect-avro-converter</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.parquet</groupId>
+                <artifactId>parquet-column</artifactId>
+                <version>${parquet.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.parquet</groupId>
+                <artifactId>parquet-avro</artifactId>
+                <version>${parquet.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>joda-time</groupId>
+                <artifactId>joda-time</artifactId>
+                <version>${joda.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.httpcomponents</groupId>
+                <artifactId>httpclient</artifactId>
+                <version>${httpclient.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.httpcomponents</groupId>
+                <artifactId>httpcore</artifactId>
+                <version>${httpcore.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>junit</groupId>
+                <artifactId>junit</artifactId>
+                <version>${junit.version}</version>
+                <scope>test</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.apache.kafka</groupId>
+            <artifactId>connect-api</artifactId>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>jline</groupId>
+            <artifactId>jline</artifactId>
+            <version>${jline.version}</version>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <inherited>true</inherited>
+                <configuration>
+                    <compilerArgs>
+                        <arg>-Xlint:all</arg>
+                        <arg>-Werror</arg>
+                    </compilerArgs>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <configuration>
+                    <reuseForks>false</reuseForks>
+                    <forkCount>1</forkCount>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-checkstyle-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>validate</id>
+                        <phase>validate</phase>
+                        <configuration>
+                            <suppressionsLocation>checkstyle/suppressions.xml</suppressionsLocation>
+                        </configuration>
+                        <goals>
+                            <goal>check</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+</project>
